@@ -1,35 +1,31 @@
 
 
-
+#takes list input and returns longest common prefix
 def longestCommonPrefix(strs):
-    def frequent(list):
-
-        return (max(set(list), key=list.count))
-
-    ans = ""
+    if len(strs) == 1:
+        return (strs[0])
+    if len(set(strs)) == 1:
+        return strs[0]
     testlist = []
-    testset = {}
     for i in strs:
         testlist.append(i[0:1])
     testset = set(testlist)
-    if len(testset) == len(testlist):
+
+    if len(testset) > 1:
         return ("")
 
-    word_length = len(min(strs))
+    ans = ""
+    for i in range(len(min(strs))):
+        temp1 = []
+        temp2 = []
+        for x in strs:
+            temp1.append(x[0:i + 1])
+            if i < len(min(strs)) + 1:
+                temp2.append(x[0:i + 2])
 
-    for i in range(len(strs)):
-        strs[i] = strs[i][0:word_length]
-    templist = []
-    while len(templist) == len(set(templist)):
-
-        for i in range(word_length):
-
-            for word in strs:
-                templist.append(word[0:i + 1])
-            print(templist)
-        templist.clear()
-
-    return ans
+        if len(set(temp1)) == 1:
+            if len(set(temp2)) != 1:
+                return temp1[0]
 
 
 print(longestCommonPrefix(["flower", "flow", "flight"]))
